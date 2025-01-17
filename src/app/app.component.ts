@@ -1,12 +1,23 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { NavbarComponent } from "./shared/components/navbar/navbar.component";
+import { IconService } from "./icon.service";
+import { MatIconModule } from "@angular/material/icon";
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  selector: "app-root",
+  standalone: true,
+  imports: [RouterOutlet, NavbarComponent, MatIconModule, CommonModule],
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
 })
 export class AppComponent {
-  title = 'darceymckelvey';
+  title = "darceymckelvey";
+
+  constructor(private iconService: IconService) {}
+
+  ngOnInit() {
+    this.iconService.registerIcons();
+  }
 }
