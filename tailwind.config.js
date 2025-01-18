@@ -3,6 +3,7 @@ import colors from "tailwindcss/colors";
 
 export const mode = "jit";
 export const purge = { enabled: true, content: ["./src/**/*.{html,ts}"] };
+export const darkMode = "class";
 export const content = ["./src/**/*.{html,ts}"];
 export const theme = {
   extend: {
