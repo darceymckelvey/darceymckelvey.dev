@@ -1,11 +1,52 @@
+<!-- mobile/tablet hamburger icon -->
+<button class="md:hidden ml-16" (click)="toggleMobileMenu()">
+  <mat-icon [svgIcon]="'menu'"></mat-icon>
+</button>
+
+<!-- mobile navigation container -->
 <div
-  class="fixed top-0 left-0 h-screen w-16 m-0 flex flex-col bg-gray-900 text-white shadow-lg"
+  class="md:hidden fixed inset-0 bg-gray-900 transform transition-transform duration-300 ease-in-out z-50"
+  [ngClass]="{
+    'translate-x-0': isMobileMenuOpen,
+    '-translate-x-full': !isMobileMenuOpen,
+  }"
 >
-  <div class="sidebar-icon group" routerLink="/home" routerLinkActive="active">
-    <mat-icon [svgIcon]="'home'"></mat-icon>
-    <span class="sidebar-tooltip group-hover:scale-100">{{
-      tooltips.home
-    }}</span>
+  <!-- close button -->
+  <button
+    (click)="toggleMobileMenu()"
+    class="absolute top-4 right-4 text-white"
+  >
+    <mat-icon [svgIcon]="'close'">close</mat-icon>
+  </button>
+
+  <div class="flex flex-col items-center pt-16 space-y-6">
+    <div
+      class="mobile-nav-item"
+      *ngFor="let item of navItems"
+      routerLink="{{ item.path }}"
+      routerLinkActive="active"
+      (click)="toggleMobileMenu()"
+    >
+      <mat-icon [svgIcon]="item.icon"></mat-icon>
+      <span class="ml-2">{{ item.label }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- desktop navigation -->
+<div
+  class="hidden md:fixed md:top-0 md:left-0 md:h-screen md:w-16 md:m-0 md:flex flex-col bg-gray-900 text-white shadow-lg"
+>
+  <div
+    class="sidebar-icon group"
+    *ngFor="let item of navItems"
+    routerLink="{{ item.path }}"
+    routerLinkActive="active"
+  >
+    <mat-icon [svgIcon]="item.icon"></mat-icon>
+    <span class="sidebar-tooltip group-hover:scale-100">
+      {{ item.label }}
+    </span>
   </div>
 
   <div

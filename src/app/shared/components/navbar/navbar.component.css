@@ -25,3 +25,15 @@ mat-icon {
   width: 24px !important;
   height: 23px !important;
 }
+
+.mobile-menu-open {
+  overflow: hidden;
+}
+
+.mobile-nav-item {
+  @apply flex items-center w-full text-center px-6 py-4 text-white hover:bg-gray-700 transition-colors duration-200;
+}
+
+.mobile-nav-item.active {
+  @apply bg-green-600;
+}
