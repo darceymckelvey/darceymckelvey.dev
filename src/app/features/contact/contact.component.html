@@ -1,1 +1,90 @@
-<p>contact works!</p>
+<div>
+  <header>
+    <h2 class="txt-2xl font-bold text-gray-800 mb-7">Get in touch with me.</h2>
+  </header>
+
+  <form [formGroup]="contactForm" (ngSubmit)="sendEmail()">
+    <!-- name field -->
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+        Name
+      </label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="w-sm px-3 py-2 border border-green-400 rounded-md shadow-sm focus:outline-none"
+        placeholder="John Doe"
+        [ngClass]="{
+          'border-red-500': isFieldInvalid('name'),
+        }"
+      />
+      <div *ngIf="isFieldInvalid('name')" class="text-red-500 text-sm mt-1">
+        Name is required!
+      </div>
+    </div>
+
+      <!-- email field -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="w-sm px-3 py-2 border border-green-400 rounded-md shadow-sm focus:outline-none"
+          placeholder="johndoe@example.com"
+          [ngClass]="{
+            'border-red-500': isFieldInvalid('email'),
+          }"
+        />
+        <div *ngIf="isFieldInvalid('email')" class="text-red-500 text-sm mt-1">
+          <span *ngIf="hasError('email', 'required')">
+            Email is required!
+          </span>
+          <span *ngIf="hasError('email', 'email')">
+            Please enter a valid email address!
+          </span>
+        </div>
+      </div>
+
+      <!-- message field -->
+      <div>
+          <label for="message" class="block text-sm font-medium text-gray-700 mb-1">
+              Message
+          </label>
+          <textarea
+              id="message"
+              formControlName="message"
+              class="w-sm px-3 py-2 border border-green-400 rounded-md shadow-sm focus:outline-none"
+              placeholder="Your message"
+              [ngClass]="{
+        'border-red-500': isFieldInvalid('message'),
+      }"
+          ></textarea>
+          <div *ngIf="isFieldInvalid('message')" class="text-red-500 text-sm mt-1">
+              Message is required!
+          </div>
+      </div>
+
+      <!-- submit button -->
+      <div>
+          <button
+              type="submit"
+              class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+              [disabled]="isSubmitting"
+          >
+              Send
+          </button>
+      </div>
+
+      <!-- success and error messages -->
+      <div *ngIf="successMessage" class="text-green-500 mt-4">
+          {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="text-red-500 mt-4">
+          {{ errorMessage }}
+      </div>
+  </form>
+</div>
